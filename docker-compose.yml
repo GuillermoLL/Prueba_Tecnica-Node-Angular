@@ -1,0 +1,27 @@
+services:
+  angular:
+    image: guillermolillo/angular-prueba-tecnica:18.17.0
+    container_name: angular-container
+    ports:
+      - 4200:4200
+    build:
+      context: ./angular-app
+      dockerfile: Dockerfile
+    networks:
+      - node-angular-network
+    depends_on:
+      - node
+
+  node:
+    image: guillermolillo/node-prueba-tecnica:18.17.0
+    container_name: node-container
+    ports:
+      - 8080:8080
+    build:
+      context: ./node-app
+      dockerfile: Dockerfile
+    networks:
+      - node-angular-network
+
+networks:
+  node-angular-network:
