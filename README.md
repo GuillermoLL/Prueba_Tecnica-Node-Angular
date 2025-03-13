@@ -51,23 +51,23 @@ El objetivo de esta prueba, es desarrollar una pequeña aplicación web, usando 
 
 ### Requisitos
 
-#### Angular:
+#### Angular
 
 - Por cada usuario se mostrará: nombre de usuario, nombre, apellido1, apellido2 y correo electrónico.
 - Formulario de búsqueda que permitirá filtrar por: nombre, apellidos y correo electrónico.
 
-#### Node:
+#### Node
 
 - Un endpoint de tipo POST para obtener el listado de usuarios filtrado y con paginación.
 
 ### Librerias extra
 
-#### Angular:
+#### Angular
 
 - Ts-standar: Para lintar el codigo y no tener errores al escribir.
 - Tailwind: Para crear los diseños de interfaces.
 - Postcss: Para poder instalar y configurar Tailwind en Angular.
 
-#### Node:
+#### Node
 
 - Express: Para hacer las peticiones http.
