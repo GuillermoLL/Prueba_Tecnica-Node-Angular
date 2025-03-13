@@ -16,6 +16,7 @@ Se montara la imagen y el contenedor de la app.
 Una vez que termine de instalar dirígete a <http://localhost:4200> para revisar la app.
   
 **En local**
+
 Primero asegurate de que estas en la version de node 18.17.0
 
 Despues, instala todas las dependencias
