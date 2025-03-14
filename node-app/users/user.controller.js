@@ -1,3 +1,6 @@
+import data from './data.json' assert {type: 'json'}
+
+export function UserController (request, response) {
   const { method, url } = request
 
   if (method === 'POST' && url === '/users') {
@@ -16,4 +19,5 @@
 
   response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })
   response.write('<h1>Page not found</h1>')
+  response.end()
 }
