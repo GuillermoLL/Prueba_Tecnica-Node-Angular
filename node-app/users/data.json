@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "email": "admin@yopmail.com",
+        "name": "admin",
+        "surname1": "admin",
+        "surname2": "admin"
+    },
+    {
+        "id": 2,
+        "email": "admin2@yopmail.com",
+        "name": "admin2",
+        "surname1": "admin2",
+        "surname2": "admin2"
+    },
+    {
+        "id": 3,
+        "email": "admin3@yopmail.com",
+        "name": "admin3",
+        "surname1": "admin3",
+        "surname2": "admin3"
+    },
+    {
+        "id": 4,
+        "email": "admin4@yopmail.com",
+        "name": "admin4",
+        "surname1": "admin4",
+        "surname2": "admin4"
+    },    {
+        "id": 5,
+        "email": "admin5@yopmail.com",
+        "name": "admin5",
+        "surname1": "admin5",
+        "surname2": "admin5"
+    },
+    {
+        "id": 6,
+        "email": "admin6@yopmail.com",
+        "name": "admin6",
+        "surname1": "admin6",
+        "surname2": "admin6"
+    }
+]
