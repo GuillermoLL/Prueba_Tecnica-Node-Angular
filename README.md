@@ -70,4 +70,5 @@ El objetivo de esta prueba, es desarrollar una pequeña aplicación web, usando 
 
 #### Node
 
-- Express: Para hacer las peticiones http.
+- Standar: Para lintar el codigo y no tener errores al escribir.
+
