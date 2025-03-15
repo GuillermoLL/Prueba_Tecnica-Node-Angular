@@ -4,13 +4,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "init": "node --watch server.js"
+    "init": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "nodemon": "3.1.9",
     "standard": "17.1.2"
   },
   "eslintConfig": {
