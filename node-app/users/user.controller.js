@@ -8,6 +8,7 @@ export async function UserController (request, response) {
   const { method } = request
   const { pathname, query } = url.parse(request.url, true)
 
+  // ? Metodos CRUD
   if (method === 'POST' && pathname === '/users') {
     let bodyChunks = ''
     await request
