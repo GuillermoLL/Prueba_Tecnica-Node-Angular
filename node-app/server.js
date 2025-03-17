@@ -3,7 +3,7 @@ import { UserController } from './users/user.controller.js'
 
 const server = http.createServer((request, response) => {
   // ? Middleware - Controla el CORS
-  cors()
+  cors(request, response)
 
   UserController(request, response)
 })
