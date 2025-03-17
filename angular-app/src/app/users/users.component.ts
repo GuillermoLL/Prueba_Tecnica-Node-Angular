@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { UsersService } from './users.service'
-import { first, map, Observable } from 'rxjs'
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs'
 import { User, UserResponse } from './user.model'
 import { AsyncPipe } from '@angular/common'
 
@@ -11,7 +11,8 @@ import { AsyncPipe } from '@angular/common'
   templateUrl: './users.component.html'
 })
 export class UsersComponent {
-  users$: Observable<User[]>
+  users$ = new Observable<User[]>()
+  searchFilter$ = new BehaviorSubject<string>('')
 
   page = 1
   pages: number[] = []
@@ -19,26 +20,18 @@ export class UsersComponent {
   total = 0
 
   constructor (private readonly usersService: UsersService) {
-    this.users$ = this.usersService.postUsers(this.page, this.perPage)
-      .pipe(
-        first(),
-        map((response) => this.formatData(response))
-      )
+    this.pagination(1)
   }
 
   search (event: Event): void {
     const input = event.currentTarget as HTMLInputElement
-    this.users$ = this.usersService.getUsers(1, this.perPage, input.value).pipe(
-      first(),
-      map((response) => this.formatData(response))
-    )
-
-    console.log(input.value)
+    this.pagination(1)
+    this.searchFilter$.next(input.value)
   }
 
   pagination (pageToGo: number): void {
-    this.users$ = this.usersService.postUsers(pageToGo, this.perPage).pipe(
-      first(),
+    this.users$ = this.searchFilter$.pipe(
+      switchMap((filter) => this.usersService.postUsers(pageToGo, this.perPage, filter)),
       map((response) => this.formatData(response))
     )
   }
