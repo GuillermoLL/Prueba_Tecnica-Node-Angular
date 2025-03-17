@@ -15,6 +15,7 @@ COPY . /angular-app
 
 WORKDIR /angular-app
 RUN npm install --force
+RUN find node_modules -path '*/needle/test/files/*' -delete
 
 #############################################################
 # FINAl #####################################################
