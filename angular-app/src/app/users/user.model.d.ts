@@ -11,9 +11,10 @@ export interface _metadata {
   'page': number
   'per_page': number
   'filter': string
+  'total': number
 }
 
 export interface UserResponse {
-  _metadata
-  users: User[]
+  _metadata: _metadata
+  users: any
 }

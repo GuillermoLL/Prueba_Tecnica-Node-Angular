@@ -17,7 +17,7 @@
         </div>
         <div class="rounded-lg overflow-x-auto  shadow-md">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 whitespace-nowrap">
                     <tr>
                         <th scope="col" class="pl-6 py-3">
                             Nombre usuario
@@ -37,8 +37,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (user of (users$ | async); track user.id) {
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        @for (user of (users$ | async); track user.id) {
                             <th scope="row" class="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ user.name }} {{ user.surname1 }} {{ user.surname2 }} 
                             </th> 
@@ -54,10 +54,38 @@
                             <td class="pl-6 py-4">
                                 ${{ user.email }} 
                             </td>
-                        }
-                    </tr>
+                        </tr>
+                    }
                 </tbody>
             </table>
+            <nav class="flex items-center flex-column flex-wrap justify-between pt-4" aria-label="Navegador de la tabla">
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Mostrando <span class="font-semibold text-gray-900 dark:text-white">{{(page - 1) * perPage}}-{{page * perPage < total ? page * perPage : total}}</span> de <span class="font-semibold text-gray-900 dark:text-white"> {{total}}</span></span>
+                <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+                    <li>
+                        <a class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            [class.pointer-events-none]="page === 1"
+                            (click)="pagination(page - 1)">
+                        Anterior</a>
+                    </li>
+                    @for (pageIndex of pages; track $index) {
+                        <li>
+                            <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                {{ pageIndex }}</a>
+                        </li>
+                    } @empty {
+                        <li>
+                            <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                1</a>
+                        </li>
+                    }
+                    <li>
+                        <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            [class.pointer-events-none]="page >= pages.length"
+                            (click)="pagination(page + 1)">
+                        Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </article>
 </section>

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { UserResponse } from './user.model'
@@ -11,22 +11,15 @@ export class UsersService {
 
   constructor (private readonly http: HttpClient) { }
 
-  postUsers (page?: number, perPage?: number, filter?: string): Observable<UserResponse> {
-    return this.http.post<UserResponse>(`${this.URL}`, {
+  postUsers (page: number = 1, perPage: number, filter?: string): Observable<UserResponse> {
+    return this.http.post<UserResponse>(`${this.URL}`, JSON.stringify({
       filter,
       page,
       per_page: perPage
-    })
+    }))
   }
 
-  getUsers (page?: number, perPage?: number, filter?: string): Observable<UserResponse> {
-    const params = new HttpParams()
-    if (page && perPage && filter) {
-      params
-        .set('filter', filter)
-        .set('page', page)
-        .set('per_page', perPage)
-    }
-    return this.http.get<UserResponse>(`${this.URL}`, { params })
+  getUsers (page: number = 1, perPage: number, filter?: string): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.URL}?page=${page}&per_page=${perPage}${filter ? '&filter=' + filter : ''}`)
   }
 }

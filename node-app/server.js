@@ -16,10 +16,6 @@ server.listen(PORT, () => {
 function cors (request, response) {
   if (request.headers.origin) {
     response.setHeader('Access-Control-Allow-Origin', '*')
-    response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST')
-    return
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
   }
-
-  response.writeHead(423, { 'Content-Type': 'text/html; charset=utf-8' })
-  response.end()
 }
