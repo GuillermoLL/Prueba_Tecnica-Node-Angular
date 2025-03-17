@@ -71,4 +71,5 @@ El objetivo de esta prueba, es desarrollar una pequeña aplicación web, usando 
 #### Node
 
 - Standar: Para lintar el codigo y no tener errores al escribir.
+- Nodemon: Para lanzar el proyecto en desarrollo y ver los cambios mas rapidamente.
 
