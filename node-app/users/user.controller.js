@@ -16,12 +16,20 @@ export async function UserController (request, response) {
         bodyChunks += chunk.toString()
       })
       .on('end', () => {
-        const body = JSON.parse(bodyChunks)
+        let body = {}
+        try {
+          body = JSON.parse(bodyChunks)
+        } catch {
+          response.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' })
+          response.end(JSON.stringify({
+            error: 'Json mal formateado'
+          }))
+        }
 
         if (!validateEntry(body)) {
           response.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' })
           response.end(JSON.stringify({
-            error: 'Falta alguna propiedad'
+            error: 'Falta alguna propiedad obligatoria'
           }))
           return
         }
@@ -51,18 +59,21 @@ export async function UserController (request, response) {
   }
 }
 
-function paginateData (data) {
-  let { filter, page, per_page: perPage } = data
+function paginateData (config) {
+  let { filter, page, per_page: perPage } = config
 
   page = parseInt(page)
   perPage = parseInt(perPage)
-  filter = filter.toLowerCase()
 
   const usersBlock = (page - 1) * perPage
 
-  const filteredData = filterData({ filter, page, perPage })
-  const pages = Math.ceil(filteredData.length / perPage)
-  const slicedData = filteredData.splice(usersBlock, usersBlock + perPage)
+  let dataToUse = [...data]
+  if (filter) {
+    filter = filter.toLowerCase()
+    dataToUse = filterData({ filter, page, perPage })
+  }
+  const pages = Math.ceil(dataToUse.length / perPage)
+  const slicedData = dataToUse.splice(usersBlock, usersBlock + perPage)
 
   return {
     _metadata: {
@@ -88,7 +99,7 @@ function filterData ({ filter, page, perPage }) {
 }
 
 function validateEntry (objectToValidate) {
-  if (objectToValidate.filter && objectToValidate.page && objectToValidate.per_page) { return true }
+  if (objectToValidate.page && objectToValidate.per_page) { return true }
 
   return false
 }
