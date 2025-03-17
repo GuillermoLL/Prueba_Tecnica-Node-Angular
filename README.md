@@ -21,7 +21,7 @@ Una vez que termine de instalar dirígete a <http://localhost:4200> para revisar
 
 Primero asegurate de que estas en la version de node 18.17.0.
 
-Despues, dirigite a la carpeta de node-app e instala  las dependencias
+Despues, dirigite a la carpeta de node-app, instala las dependencias
 
 ```console
 npm install
@@ -33,10 +33,10 @@ Y lanza el proyecto
 npm run init
 ```
 
-Despues, dirigite a la carpeta de angular-app e instala las dependencias
+Despues, dirigite a la carpeta de angular-app, instala las dependencias
 
 ```console
-npm install
+npm install --force
 ```
 
 Y lanza el proyecto
